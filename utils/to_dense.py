@@ -53,6 +53,7 @@ class ToDenseFunction(Function):
         spatial_range: List[int],
     ) -> torch.Tensor:
         outputs = to_dense_forward(feats, coords, spatial_range)
+        spatial_range = make_tensor(spatial_range, dtype=torch.int, device=feats.device)
         ctx.for_backwards = (coords, spatial_range)
         return outputs
 
